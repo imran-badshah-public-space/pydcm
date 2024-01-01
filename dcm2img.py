@@ -2,7 +2,7 @@ import pydicom as dicom, cv2, argparse
 import os
 
 """
-Sourced from https://medium.com/@vivek8981/dicom-to-jpg-and-extract-all-patients-information-using-python-5e6dd1f1a07d
+Adapted from https://medium.com/@vivek8981/dicom-to-jpg-and-extract-all-patients-information-using-python-5e6dd1f1a07d
 """
 
 def parse_args():
@@ -28,9 +28,10 @@ def convertToJPG(args):
         ds = dicom.dcmread(os.path.join(folder_path, image))
         if n == 1:
             print(ds)
-        pixel_array_numpy = ds.pixel_array
+        pixel_array = ds.pixel_array
+        normalized_pixel_array = cv2.normalize(pixel_array, None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.CV_8U)
         image = image.replace('.dcm', '.jpg')
-        cv2.imwrite(os.path.join(jpg_folder_path, image), pixel_array_numpy)
+        cv2.imwrite(os.path.join(jpg_folder_path, image), normalized_pixel_array)
         if n % 10 == 0:
             print('{} image converted'.format(n))
 
