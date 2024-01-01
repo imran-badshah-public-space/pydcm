@@ -50,7 +50,7 @@ python3 dcm2img.py -i input/Lung_Cancer__M_1970-01-01_Lung_Cancer_Default/1.3.12
 
 ### Extract meta-data and specific tags from DCM
 
-Extracts meta-data from DICOM and lists this as a table:
+Extracts meta-data from DICOM and lists this (even as a table with the `-g` flag):
 
 | study-uuid  |   occurances  |   file_path |
 |    :---:    |     :---:     |     :---:   |
